@@ -16,6 +16,9 @@ EXTRA_DIST = \
 	debian/copyright \
 	debian/rules
 
+# Autoconf and automake appear to be broken. Huzzah.
+EXTRA_DIST += depcomp
+
 dist-hook: netbiff.spec
 	cp netbiff.spec $(distdir)
 
