@@ -21,6 +21,24 @@ program). Features include BSD mailbox and IMAP4 support, a backend
 plug-in system (for other protocols), arbitrary numbers of backends,
 pluggable interfaces (GTK and text-based), and arbitrary actions on biff.
 
+%package netbiffd
+Summary: Netbiff backend for filesystems
+Group: X11/Utilities
+
+%description netbiffd
+Netbiffd is meant to be used as a backend to the netbiff mail checking
+program. Netbiffd uses file system size checks and access/modification times
+to check for file update (making it more versatile than simple mail folder
+checking).
+
+%package netbiffd-imap
+Summary: Netbiff backend for IMAP
+Group: X11/Utilities
+
+%description netbiffd-imap
+Netbiffd-imap is meant to be used as a backend to the netbiff mail checking
+program.  Netbiffd-imap checks for mail over IMAP connections.
+
 %prep
 %setup -q
 
@@ -32,17 +50,26 @@ make
 %install
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/{bin,man/man1}
-make prefix=$RPM_BUILD_ROOT/%{prefix} install
-find $RPM_BUILD_ROOT/%{prefix} -type f -print | sed "s@^$RPM_BUILD_ROOT@@g" > %{name}-%{version}-filelist
+make prefix=$RPM_BUILD_ROOT/%{prefix} install-strip
 
 %clean
 rm -r $RPM_BUILD_ROOT
 
-%files -f %{name}-%{version}-filelist
+%files
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc/* images
 %defattr(-,root,root)
+/usr/bin/netbiff
+
+%files netbiffd
+/usr/bin/netbiffd
+
+%files netbiffd-imap
+/usr/bin/netbiffd-imap
 
 %changelog
+* Fri May 12 2000 Jeff King <peff@acm.org>
+- Added netbiffd/netbiffd-imap packages
+
 * Tue May 09 2000 Jeff King <peff@acm.org>
 - Moved spec file to netbiff.spec.in for autogen of name/version
 
