@@ -12,11 +12,20 @@ or
 
 netbiffd-imap login hostname username [password]
 	This indicates that a login should be performed with the given
-username and password.  Hopefully the user will eventually be prompted for
-such information (which would require the passing of arbitrary data fields
-between front and back ends), as putting it on the command line is poor.  
-	If the password is omitted, it will be requested with item tag
-"secret/password".
+username and password.  If the password is omitted, it will be requested with
+item tag "secret/password". The hostname should be of the form:
+  host[:port][/ssl]
+where
+  - host is the remote hostname
+  - port specifies the remote port; this defaults to 143 for non-ssl
+    connections, and 993 for ssl connections
+  - ssl indicates that ssl should be used to connect; note that the STARTTLS
+    directive is not currently supported.
+Examples:
+  mail.example.com          # default settings, port 143, no ssl
+  mail.example.com:1043     # custom port, no ssl
+  mail.example.com/ssl      # ssl, default port becomes 993
+  mail.example.com/ssl:1000 # ssl with a custom port
 
 Once authentication has been established (either through login or preauth),
 the process waits for folder specifications or poll requests. When a poll
