@@ -1,0 +1,12 @@
+action.o
+buffer.o
+child.o
+conf.o
+connection.o
+dir.o
+gui.o
+gui_gtk.o
+gui_text.o
+home.o
+proto.o
+xlib.o

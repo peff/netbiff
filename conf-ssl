@@ -1,0 +1,4 @@
+-lssl -lcrypto
+
+This file contains any linker command line options required to link against
+the OpenSSL library.

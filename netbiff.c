@@ -29,28 +29,12 @@ int main(int argc, char **argv) {
 
   child_ignore();
 
-  {
-#ifdef HAVE_GETOPT_LONG
-    const static struct option long_opt[] = {
-      { "conf", 1, NULL, 'c' },
-      { "gui",  1, NULL, 'g' },
-      { "help", 0, NULL, 'h' },
-      { 0, 0, 0, 0 }
-    };
-#endif
-    static const char short_opt[] = "hc:g:";
-
-#ifdef HAVE_GETOPT_LONG
-    while((ch = getopt_long(argc, argv, short_opt, long_opt, NULL)) != EOF) {
-#else
-    while((ch = getopt(argc, argv, "hc:g:")) != -1) {
-#endif
-      switch(ch) {
-        case 'h': printhelp(stdout); exit(0);
-        case 'c': conf_dir = xstrdup(optarg); break;
-        case 'g': gui_name = optarg; break;
-        case '?': printhelp(stderr); exit(1);
-      }
+  while((ch = getopt(argc, argv, "hc:g:")) != -1) {
+    switch(ch) {
+      case 'h': printhelp(stdout); exit(0);
+      case 'c': conf_dir = xstrdup(optarg); break;
+      case 'g': gui_name = optarg; break;
+      case '?': printhelp(stderr); exit(1);
     }
   }
 
