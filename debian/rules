@@ -6,8 +6,10 @@ export DH_COMPAT
 prefix = usr
 cfgflags = --prefix=/$(prefix)
 custom_targets = netbiff/netbiff-text netbiff/netbiff-gtk
+backend_plain = backend/netbiffd backend/netbiffd-imap-plain
+backend_ssl = backend/netbiffd-imap-ssl
 
-build: $(custom_targets) backends
+build: $(custom_targets) $(backend_plain) $(backend_ssl)
 
 netbiff/netbiff-text:
 	./configure $(cfgflags) --disable-gtk
@@ -19,13 +21,19 @@ netbiff/netbiff-gtk:
 	(cd netbiff && $(MAKE) clean && $(MAKE))
 	cp netbiff/netbiff netbiff/netbiff-gtk
 
-backends:
+backend-plain:
 	./configure $(cfgflags)
-	(cd backend && $(MAKE))
+	(cd backend && $(MAKE) clean && $(MAKE))
+	cp backend/netbiffd-imap backend/netbiffd-imap-plain
+
+backend-ssl:
+	./configure $(cfgflags)
+	(cd backend && $(MAKE) clean && $(MAKE))
+	cp backend/netbiffd-imap backend/netbiffd-imap-ssl
 
 clean:
 	-make distclean
-	rm -f $(custom_targets)
+	rm -f $(custom_targets) $(backend_plain) $(backend_ssl)
 	dh_clean
 
 binary: binary-arch binary-indep
@@ -44,8 +52,10 @@ binary-arch: build
 	cp netbiff/netbiff-gtk netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk/$(prefix) install)
 # And now the backends...first imap
-	install -m 755 backend/netbiffd-imap \
+	install -m 755 backend/netbiffd-imap-plain \
 		debian/netbiffd-imap/$(prefix)/bin/netbiffd-imap
+	install -m 755 backend/netbiffd-imap-ssl \
+		debian/netbiffd-imap-ssl/$(prefix)/bin/netbiffd-imap
 # And then file
 	install -m 755 backend/netbiffd debian/netbiffd-file/$(prefix)/bin
 
@@ -56,6 +66,7 @@ binary-arch: build
 	dh_undocumented -pnetbiff-text netbiff.1
 	dh_undocumented -pnetbiff-gtk netbiff.1
 	dh_undocumented -pnetbiffd-imap netbiffd-imap.1
+	dh_undocumented -pnetbiffd-imap-ssl netbiffd-imap.1
 	dh_undocumented -pnetbiffd-file netbiffd.1
 
 	dh_strip -a

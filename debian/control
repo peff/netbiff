@@ -41,6 +41,19 @@ Description: IMAP backend for netbiff
  This backend supports connection to IMAP servers for the retrieval
  of mail information.
 
+Package: netbiffd-imap-ssl
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: netbiff-gtk | netbiff-text
+Description: IMAP backend for netbiff
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This backend supports connection to IMAP servers for the retrieval
+ of mail information.  This version supports SSL/TLS for connecting to
+ the remote host.
+
 Package: netbiffd-file
 Architecture: any
 Depends: ${shlibs:Depends}

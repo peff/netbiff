@@ -1,8 +1,8 @@
-netbiff (0.9.7) frozen unstable; urgency=low
+netbiff (0.9.7-2) frozen unstable; urgency=low
 
-  * New upstream release
+  * Build SSL backends in optional packages. 
 
- -- Jeff King <peff@acm.org>  Fri, 15 Sep 2000 03:16:54 -0400
+ -- Jeff King <peff@coredump.peff.net>  Sun,  7 Jan 2001 15:24:15 -0500
 
 netbiff (0.9.6) frozen unstable; urgency=low
 
