@@ -66,20 +66,18 @@ program.  Netbiffd-imap checks for mail over IMAP connections.
 %prep
 %setup -q
 
-%build client-text
+%build
 CFLAGS="$RPM_OPT_FLAGS" \
 	./configure --prefix=%{prefix} --disable-gtk
-make
+(cd netbiff && make)
+cp netbiff/netbiff netbiff/netbiff-text
 
-%build client-gtk
 CFLAGS="$RPM_OPT_FLAGS" \
-	./configure --prefix=%{prefix} --enable-gtk
-make
+	./configure --prefix=%{prefix} --disable-gtk
+(cd netbiff && make clean && make)
+cp netbiff/netbiff netbiff/netbiff-gtk
 
-%build backend-imap
-CFLAGS="$RPM_OPT_FLAGS" \
-	./configure --prefix=%{prefix}
-make
+(cd backend && make)
 
 %build backend-file
 CFLAGS="$RPM_OPT_FLAGS" \
