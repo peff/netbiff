@@ -3,12 +3,12 @@ Section: mail
 Priority: optional
 Maintainer: Jeff King <peff@acm.org>
 
-Package: netbiff-client-text
+Package: netbiff-text
 Architecture: any
 Depends: ${shlibs:Depends}
-Recommends: netbiff-backend-imap | netbiff-backend-file
-Conflicts: netbiff-client-gtk
-Replaces: netbiff-client-gtk
+Recommends: netbiffd-imap | netbiffd-file
+Conflicts: netbiff-gtk
+Replaces: netbiff-gtk
 Description: Text-based mail notification utility
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend
@@ -16,12 +16,12 @@ Description: Text-based mail notification utility
  .
  This package contains the text-based netbiff client.
 
-Package: netbiff-client-gtk
+Package: netbiff-gtk
 Architecture: any
 Depends: ${shlibs:Depends}
-Recommends: netbiff-backend-imap | netbiff-backend-file
-Conflicts: netbiff-client-text
-Replaces: netbiff-client-text
+Recommends: netbiffd-imap | netbiffd-file
+Conflicts: netbiff-text
+Replaces: netbiff-text
 Description: GTK-based mail notification utility
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend
@@ -29,10 +29,10 @@ Description: GTK-based mail notification utility
  .
  This package contains the GTK-based netbiff client.
 
-Package: netbiff-backend-imap
+Package: netbiffd-imap
 Architecture: any
 Depends: ${shlibs:Depends}
-Recommends: netbiff-client-gtk | netbiff-client-text
+Recommends: netbiff-gtk | netbiff-text
 Description: IMAP backend for netbiff
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend
@@ -41,10 +41,10 @@ Description: IMAP backend for netbiff
  This backend supports connection to IMAP servers for the retrieval
  of mail information.
 
-Package: netbiff-backend-file
+Package: netbiffd-file
 Architecture: any
 Depends: ${shlibs:Depends}
-Recommends: netbiff-client-gtk | netbiff-client-text
+Recommends: netbiff-gtk | netbiff-text
 Description: Filesystem backend for netbiff
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend

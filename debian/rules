@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+DH_COMPAT=2
+
 cfgflags = --prefix=/usr
 custom_targets = netbiff/netbiff-text netbiff/netbiff-gtk
 
@@ -32,55 +34,51 @@ binary-arch: build
 	dh_testdir
 
 # First do text
-	dh_clean -k
-	dh_installdirs
+	dh_installdirs -pnetbiff-text
 	cp netbiff/netbiff-text netbiff/netbiff
-	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
-	dh_installdeb -pnetbiff-client-text -Pdebian/tmp
-	dh_installdocs -pnetbiff-client-text -Pdebian/tmp
-	dh_installchangelogs -pnetbiff-client-text -Pdebian/tmp
-	dh_undocumented -pnetbiff-client-text netbiff.1
-	dh_strip -pnetbiff-client-text -Pdebian/tmp
-	dh_shlibdeps -pnetbiff-client-text -Pdebian/tmp
-	dh_gencontrol -pnetbiff-client-text -Pdebian/tmp
-	dh_builddeb -pnetbiff-client-text -Pdebian/tmp
+	(cd netbiff && make prefix=`pwd`/../debian/netbiff-text install)
+	dh_installdeb -pnetbiff-text
+	dh_installdocs -pnetbiff-text
+	dh_installchangelogs -pnetbiff-text
+	dh_undocumented -pnetbiff-text netbiff.1
+	dh_strip -pnetbiff-text
+	dh_shlibdeps -pnetbiff-text 
+	dh_gencontrol -pnetbiff-text
+	dh_builddeb -pnetbiff-text 
 
 # And now gtk
-	dh_clean -k
-	dh_installdirs
+	dh_installdirs -pnetbiff-gtk
 	cp netbiff/netbiff-gtk netbiff/netbiff
-	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
-	dh_installdeb -pnetbiff-client-gtk -Pdebian/tmp
-	dh_installdocs -pnetbiff-client-gtk -Pdebian/tmp
-	dh_installchangelogs -pnetbiff-client-gtk -Pdebian/tmp
-	dh_undocumented -pnetbiff-client-gtk netbiff.1
-	dh_strip -pnetbiff-client-gtk -Pdebian/tmp
-	dh_shlibdeps -pnetbiff-client-gtk -Pdebian/tmp
-	dh_gencontrol -pnetbiff-client-gtk -Pdebian/tmp
-	dh_builddeb -pnetbiff-client-gtk -Pdebian/tmp
+	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk install)
+	dh_installdeb -pnetbiff-gtk 
+	dh_installdocs -pnetbiff-gtk
+	dh_installchangelogs -pnetbiff-gtk
+	dh_undocumented -pnetbiff-gtk netbiff.1
+	dh_strip -pnetbiff-gtk 
+	dh_shlibdeps -pnetbiff-gtk
+	dh_gencontrol -pnetbiff-gtk
+	dh_builddeb -pnetbiff-gtk
 
 # And now the backends...first imap
-	dh_clean -k
-	dh_installdirs
-	cp backend/netbiffd-imap debian/tmp/usr/bin
-	dh_installdeb -pnetbiff-backend-imap -Pdebian/tmp
-	dh_installdocs -pnetbiff-backend-imap -Pdebian/tmp
-	dh_installchangelogs -pnetbiff-backend-imap -Pdebian/tmp
-	dh_undocumented -pnetbiff-backend-imap netbiff.1
-	dh_strip -pnetbiff-backend-imap -Pdebian/tmp
-	dh_shlibdeps -pnetbiff-backend-imap -Pdebian/tmp
-	dh_gencontrol -pnetbiff-backend-imap -Pdebian/tmp
-	dh_builddeb -pnetbiff-backend-imap -Pdebian/tmp
+	dh_installdirs -pnetbiffd-imap
+	cp backend/netbiffd-imap debian/netbiffd-imap/usr/bin/netbiffd-imap
+	dh_installdeb -pnetbiffd-imap
+	dh_installdocs -pnetbiffd-imap
+	dh_installchangelogs -pnetbiffd-imap
+	dh_undocumented -pnetbiffd-imap netbiffd-imap.1
+	dh_strip -pnetbiffd-imap
+	dh_shlibdeps -pnetbiffd-imap
+	dh_gencontrol -pnetbiffd-imap
+	dh_builddeb -pnetbiffd-imap
   
 # And then file
-	dh_clean -k
-	dh_installdirs
-	cp backend/netbiffd debian/tmp/usr/bin
-	dh_installdeb -pnetbiff-backend-file -Pdebian/tmp
-	dh_installdocs -pnetbiff-backend-file -Pdebian/tmp
-	dh_installchangelogs -pnetbiff-backend-file -Pdebian/tmp
-	dh_undocumented -pnetbiff-backend-file netbiff.1
-	dh_strip -pnetbiff-backend-file -Pdebian/tmp
-	dh_shlibdeps -pnetbiff-backend-file -Pdebian/tmp
-	dh_gencontrol -pnetbiff-backend-file -Pdebian/tmp
-	dh_builddeb -pnetbiff-backend-file -Pdebian/tmp
+	dh_installdirs -pnetbiffd-file
+	cp backend/netbiffd debian/netbiffd-file/usr/bin
+	dh_installdeb -pnetbiffd-file
+	dh_installdocs -pnetbiffd-file
+	dh_installchangelogs -pnetbiffd-file
+	dh_undocumented -pnetbiffd-file netbiffd.1
+	dh_strip -pnetbiffd-file
+	dh_shlibdeps -pnetbiffd-file
+	dh_gencontrol -pnetbiffd-file
+	dh_builddeb -pnetbiffd-file
