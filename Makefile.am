@@ -14,8 +14,6 @@ EXTRA_DIST = \
 	debian/changelog \
 	debian/control \
 	debian/copyright \
-	debian/dirs \
-	debian/docs \
 	debian/rules
 
 dist-hook: netbiff.spec
