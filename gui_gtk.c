@@ -1,3 +1,4 @@
+#include "gtk.h"
 #include "gui.h"
 
 #ifndef GUI_GTK

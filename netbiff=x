@@ -10,3 +10,4 @@ gui_text.o
 home.o
 proto.o
 xlib.o
+gtk.lib
