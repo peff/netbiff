@@ -1,0 +1,17 @@
+Source: netbiff
+Section: mail
+Priority: optional
+Maintainer: Jeff King <peff-netbiff@peff.net>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: netbiff
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Text and GTK-based mail notification utility
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This package contains a version built with the text and GTK interfaces,
+ as well as file and imap backends.
