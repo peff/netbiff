@@ -1,3 +1,11 @@
+0.9.12:
+
+Fixed a nasty race condition bug in the text interface.
+
+0.9.11:
+
+Moved GTK support to GTK 2.0.
+
 0.9.4:
 
 The GTK interface has been changed to be a little more useful. The old one is
@@ -31,5 +39,5 @@ Platform (OS and CPU)
 Output of ./configure
 Any compiler warnings or errors
 
-to peff@acm.org
+to peff@peff.net
 
