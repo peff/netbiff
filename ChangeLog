@@ -1,5 +1,8 @@
 This file documents changes made to Netbiff through various versions.
 
+0.9.11:
+	Fix --help requiring an argument.
+
 0.9.10:
 	Add NETBIFFD_IGNORE_ATIME option
 
@@ -8,6 +11,7 @@ This file documents changes made to Netbiff through various versions.
 
 0.9.8:
 	FreeBSD porting fixes
+
 0.9.7:
 	Fix compile problems when building --without-ssl
 
