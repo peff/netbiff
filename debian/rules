@@ -2,7 +2,8 @@
 
 DH_COMPAT=2
 
-cfgflags = --prefix=/usr
+prefix = usr
+cfgflags = --prefix=/$(prefix)
 custom_targets = netbiff/netbiff-text netbiff/netbiff-gtk
 
 build: $(custom_targets) backends
@@ -33,26 +34,22 @@ binary-indep:
 binary-arch: build
 	dh_testdir
 
-	dh_installdirs -pnetbiff-text
-	dh_installdirs -pnetbiff-gtk
-	dh_installdirs -pnetbiffd-imap
-	dh_installdirs -pnetbiffd-file
+	dh_installdirs -A usr/bin
 
 # First do text
 	cp netbiff/netbiff-text netbiff/netbiff
-	(cd netbiff && make prefix=`pwd`/../debian/netbiff-text install)
+	(cd netbiff && make prefix=`pwd`/../debian/netbiff-text/$(prefix) install)
 # And now gtk
 	cp netbiff/netbiff-gtk netbiff/netbiff
-	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk install)
+	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk/$(prefix) install)
 # And now the backends...first imap
-	dh_installdirs -pnetbiffd-imap
-	cp backend/netbiffd-imap debian/netbiffd-imap/usr/bin/netbiffd-imap
+	install -m 755 backend/netbiffd-imap \
+		debian/netbiffd-imap/usr/bin/netbiffd-imap
 # And then file
-	dh_installdirs -pnetbiffd-file
-	cp backend/netbiffd debian/netbiffd-file/usr/bin
+	install -m 755 backend/netbiffd debian/netbiffd-file/usr/bin
 
 	dh_installdeb -a
-	dh_installdocs -a
+	dh_installdocs -a AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc
 	dh_installchangelogs -a
 
 	dh_undocumented -pnetbiff-text netbiff.1
