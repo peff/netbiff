@@ -45,6 +45,8 @@ Package: netbiffd-imap-ssl
 Architecture: any
 Depends: ${shlibs:Depends}
 Recommends: netbiff-gtk | netbiff-text
+Conflicts: netbiffd-imap
+Provides: netbiffd-imap
 Description: IMAP backend for netbiff
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend
