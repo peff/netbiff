@@ -10,3 +10,4 @@ configure
 netbiff.spec
 stamp-h
 stamp-h.in
+netbiff-*.tar.gz
