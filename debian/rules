@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
-DH_COMPAT=2
+DH_COMPAT = 2
+export DH_COMPAT
 
 prefix = usr
 cfgflags = --prefix=/$(prefix)
