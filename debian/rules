@@ -27,7 +27,7 @@ $(backend_plain):
 	cp backend/netbiffd-imap backend/netbiffd-imap-plain
 
 $(backend_ssl):
-	./configure $(cfgflags)
+	./configure $(cfgflags) --with-ssl
 	(cd backend && $(MAKE) clean && $(MAKE))
 	cp backend/netbiffd-imap backend/netbiffd-imap-ssl
 
