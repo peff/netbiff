@@ -73,6 +73,4 @@ if test "$enable_gtk" = "yes"; then
     AC_MSG_WARN(Hmmm. You specified GTK but I couldn't find it. Disabling...))
 fi
 
-AC_OUTPUT(netbiff/Makefile backend/Makefile Makefile)
-
-
+AC_OUTPUT(netbiff/Makefile backend/Makefile Makefile netbiff.spec)
