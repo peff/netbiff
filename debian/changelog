@@ -2,7 +2,7 @@ netbiff (0.9.7-2) frozen unstable; urgency=low
 
   * Build SSL backends in optional packages. 
 
- -- Jeff King <peff@coredump.peff.net>  Sun,  7 Jan 2001 15:24:15 -0500
+ -- Jeff King <peff@acm.org>  Sun,  7 Jan 2001 15:24:15 -0500
 
 netbiff (0.9.6) frozen unstable; urgency=low
 
