@@ -1,3 +1,8 @@
+0.9.17
+ - netbiffd-imap now uses the UNSEEN flag instead of the RECENT flag.
+   The user-visible behavior change should be minor, and the UNSEEN flag
+   is better supported in many implementations.
+
 0.9.18
  - For GTK interface, manually set WM_CLASS to Netbiff; this avoids the case
    where GTK fails to guess the right name (e.g., when we have already parsed

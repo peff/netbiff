@@ -349,7 +349,7 @@ void imap_destroy(ImapContext *c) {
 
 int imap_get_recent(ImapContext *c, const char *folder) {
   c->error = 0;
-  switch(imap_command(c, handle_status, "STATUS %s (RECENT)", folder)) {
+  switch(imap_command(c, handle_status, "STATUS %s (UNSEEN)", folder)) {
     case -1:
       return -1;
     case 0:
