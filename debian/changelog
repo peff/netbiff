@@ -1,3 +1,10 @@
+netbiff (0.9.8) frozen unstable; urgency=low
+
+  * FreeBSD port fixes (don't assume getopt_long)
+  * Silence warnings related to time.h
+
+ -- Jeff King <peff@peff.net>  Tue, 10 Jul 2001 17:36:23 -0400
+
 netbiff (0.9.7-2) frozen unstable; urgency=low
 
   * Build SSL backends in optional packages. 
