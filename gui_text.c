@@ -1,7 +1,5 @@
 #include "gui.h"
 
-GUI *gui_text_description = NULL;
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
