@@ -3,7 +3,7 @@
 cfgflags = --prefix=/usr
 custom_targets = netbiff/netbiff-text netbiff/netbiff-gtk
 
-build: $(custom_targets)
+build: $(custom_targets) backends
 
 netbiff/netbiff-text:
 	./configure $(cfgflags) --disable-gtk
@@ -14,6 +14,10 @@ netbiff/netbiff-gtk:
 	./configure $(cfgflags) --enable-gtk
 	(cd netbiff && $(MAKE) clean && $(MAKE))
 	cp netbiff/netbiff netbiff/netbiff-gtk
+
+backends:
+	./configure $(cfgflags)
+	(cd backend && $(MAKE))
 
 clean:
 	-make distclean
