@@ -7,7 +7,7 @@ Standards-Version: 3.6.1
 
 Package: netbiff
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}
 Description: Text and GTK-based mail notification utility
  Netbiff is an enhanced version of the traditional biff, featuring
  multiple connections, user-defined biff/reset actions, and backend

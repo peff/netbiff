@@ -1,7 +1,13 @@
 #!/usr/bin/make -f
 
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	echo /usr >conf-home
+	touch configure-stamp
+
 build: build-stamp
-build-stamp: configure-stamp 
+build-stamp: configure-stamp
 	dh_testdir
 	$(MAKE)
 	touch build-stamp
@@ -9,7 +15,7 @@ build-stamp: configure-stamp
 clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp
+	rm -f build-stamp configure-stamp
 	-$(MAKE) clean
 	dh_clean 
 
@@ -35,4 +41,4 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install 
+.PHONY: build clean binary-indep binary-arch binary install configure
