@@ -1,0 +1,37 @@
+Netbiff is an advanced "biff," or mail notification utility, geared towards
+checking mailboxes across multiple machines.  Each biff interface can have an
+arbitrary number of backends, each supporting a different interface to
+examining the mail.  This is release 0.9.  Everything is completed and
+thought to work, but the system lacks niceties such as autoconf support. 
+
+The following backends currently exist:
+	* BSD mailbox format
+	* IMAP4
+
+The current features are implemented:
+	* Arbitrary backends that speak a documented protocol
+	* Arbitrary backends for each session
+	* Pluggable interfaces
+		* GTK
+		* Text
+	* Arbitrary actions on "biff"
+	* Graceful retry/abort for failed backend connections
+	* Support for polling and event-driven backends
+	* Configurable poll frequency
+	* Traditional biff "look and feel"
+
+To install:
+
+	./configure
+	make
+	make install
+
+	# Edit your ~/.netbiffrc (see the file doc/config.txt for details).
+	netbiff
+
+This program is distributed under the GNU General Public License (see the
+file COPYING for details).
+
+Your questions and comments are welcome.  See the file AUTHORS for contact
+information.
+

@@ -1,0 +1,27 @@
+0.9.3:
+
+I've implemented folder reset commands (these are triggered when a folder
+de-biffs, and all folders are now in the unbiffed state, indicating that
+there is no new mail waiting).  The syntax for attaching an action to a
+connection is now changed; update actions are specified with the "update"
+keyword, and resets use the "reset" keyword.  There is also a new default
+action for resets, "image-reset".  Formerly, the image-reset was done by
+default (but now must be specified explicitly).
+
+0.9.2:
+
+I've added autoconf support. This may break some platforms, but it seems to
+work ok for me so far.  There are options to set which frontends should be
+included (--enable-text and --enable-gtk options to configure); both are
+enabled by default.
+
+Theoretically this should just require testing on other platforms. Any
+failures to build should be easily added to autoconf. If it doesn't build for
+you, please send send me the following information:
+
+Platform (OS and CPU)
+Output of ./configure
+Any compiler warnings or errors
+
+to peff@acm.org
+

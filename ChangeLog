@@ -1,0 +1,20 @@
+This file documents changes made to Netbiff through various versions.
+
+0.9.3:
+	Added mailbox resets.
+	Changed .netbiffrc syntax.
+	Included spec file.
+
+0.9.2:
+	Allowed request/response of arbitrary strings between frontend
+	and backends (e.g., netbiffd-imap will now request the password
+	if none is given on the command line).  The string is then
+	requested from the user.
+
+0.9.1: 
+	Change SIGCLD to SIGCHLD (for BSD support -- thanks to Martin
+	Samuelsson)
+	Added autoconf support
+
+0.9: 
+	Official release
