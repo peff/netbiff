@@ -43,9 +43,10 @@ rm -r $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Tue May 09 2000 Jeff King <peff@acm.org>
+- Moved spec file to netbiff.spec.in for autogen of name/version
+
 * Fri Jan 28 2000 Johnny Accot <accot@cena.fr>
   [netbiff-0.9.2-1]
 - Initial packaging of version 0.9.2.
 
-* Tue May 09 2000 Jeff King <peff@acm.org>
-- Moved spec file to netbiff.spec.in for autogen of name/version
