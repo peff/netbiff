@@ -1,6 +1,10 @@
 0.9.15:
 
-Ditched autoconf, simplified directory layout.
+- ditched autoconf; use conf-* to configure
+- simplified directory layout
+- requires SSL to build (this should be standard nowadays)
+- always build text interface
+- build GTK interface always if pkg-config gtk+-2.0 works
 
 0.9.14:
 
