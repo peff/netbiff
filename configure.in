@@ -20,13 +20,6 @@ AC_PROG_AWK
 AC_PROG_INSTALL
 AC_PROG_LN_S
 
-AC_PROG_YACC
-dnl Hmm. This is a kludge to support -d in bison, but automake
-dnl seems pretty braindead about it.
-AC_MSG_WARN(Adding -d option to $YACC. Hope this doesn't break anything.)
-YACC="$YACC -d"
-AM_PROG_LEX
-
 dnl Checks for header files.
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(getopt.h malloc.h sys/time.h unistd.h)
