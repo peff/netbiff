@@ -38,6 +38,7 @@ binary-arch: build
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
 	dh_installdeb -pnetbiff-client-text -Pdebian/tmp
 	dh_installdocs -pnetbiff-client-text -Pdebian/tmp
+	dh_installchangelogs -pnetbiff-client-text -Pdebian/tmp
 	dh_undocumented -pnetbiff-client-text netbiff.1
 	dh_strip -pnetbiff-client-text -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-client-text -Pdebian/tmp
@@ -51,6 +52,7 @@ binary-arch: build
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
 	dh_installdeb -pnetbiff-client-gtk -Pdebian/tmp
 	dh_installdocs -pnetbiff-client-gtk -Pdebian/tmp
+	dh_installchangelogs -pnetbiff-client-gtk -Pdebian/tmp
 	dh_undocumented -pnetbiff-client-gtk netbiff.1
 	dh_strip -pnetbiff-client-gtk -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-client-gtk -Pdebian/tmp
@@ -63,6 +65,7 @@ binary-arch: build
 	cp backend/netbiffd-imap debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-imap -Pdebian/tmp
 	dh_installdocs -pnetbiff-backend-imap -Pdebian/tmp
+	dh_installchangelogs -pnetbiff-backend-imap -Pdebian/tmp
 	dh_undocumented -pnetbiff-backend-imap netbiff.1
 	dh_strip -pnetbiff-backend-imap -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-backend-imap -Pdebian/tmp
@@ -75,6 +78,7 @@ binary-arch: build
 	cp backend/netbiffd debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-file -Pdebian/tmp
 	dh_installdocs -pnetbiff-backend-file -Pdebian/tmp
+	dh_installchangelogs -pnetbiff-backend-file -Pdebian/tmp
 	dh_undocumented -pnetbiff-backend-file netbiff.1
 	dh_strip -pnetbiff-backend-file -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-backend-file -Pdebian/tmp
