@@ -8,5 +8,10 @@ doc/netbiffd-imap \
 doc/protocol.txt \
 images/flagup.xpm \
 images/flagdown.xpm \
-netbiff.spec
+images/yes.xpm \
+images/no.xpm \
+netbiff.spec.in
+
+dist-hook: netbiff.spec
+	cp netbiff.spec $(distdir)
 
