@@ -209,7 +209,7 @@ static void gtk_gui_init(int *argc, char ***argv) {
 
   a = *argv;
   while(*++a) {
-    if(!strcasecmp(*a, "-geometry")) {
+    if(!strcmp(*a, "-geometry")) {
       a++;
       if(!*a) {
         xerror("-geometry requires value on command line");
@@ -222,7 +222,7 @@ static void gtk_gui_init(int *argc, char ***argv) {
         }
       }
     }
-    else if(!strcasecmp(*a, "--"))
+    else if(!strcmp(*a, "--"))
       continue;
     else {
       xerror("Unrecognized option: %s", *a);

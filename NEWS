@@ -1,3 +1,8 @@
+0.9.16:
+ - let gtk block in gtk_request_data() (avoid 100% CPU utilization when
+   requesting password). Thanks, Xavi Serrano.
+ - allow correct building when gtk is not present (ignore pkg-config errors)
+
 0.9.15:
 
 - ditched autoconf; use conf-* to configure
