@@ -1,3 +1,8 @@
+0.9.14:
+
+netbiffd-imap now sends OK response when asking for password. This will avoid
+a spurious "connection has not been established" message.
+
 0.9.13:
 
 Lots of changes:
