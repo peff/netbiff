@@ -14,11 +14,13 @@
 int dir_foreach(const char* dirname, int (*cb)(const char*, const char *)) {
   DIR *d;
   struct dirent *ent;
+  int errors;
 
   d = opendir(dirname);
   if(!d)
     return -1;
 
+  errors = 0;
   while((ent = readdir(d)) != NULL) {
     char buf[PATH_MAX];
 
@@ -26,14 +28,12 @@ int dir_foreach(const char* dirname, int (*cb)(const char*, const char *)) {
       continue;
 
     make_path(buf, dirname, ent->d_name);
-    if(cb(ent->d_name, buf) < 0) {
-      closedir(d);
-      return -1;
-    }
+    if(cb(ent->d_name, buf) < 0)
+      errors++;
   }
 
   closedir(d);
-  return 0;
+  return errors;
 }
 
 /* out is assumed to be of size PATH_MAX */

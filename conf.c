@@ -193,16 +193,30 @@ static int conf_add_connection(const char *rel, const char *full) {
   return 0;
 }
 
+static int 
+conf_dir_foreach(const char *s, int (*cb)(const char *, const char *)) {
+  int e;
+  e = dir_foreach(s, cb);
+  if(e < 0) {
+    parse_error(s,"unable to open directory",xsyserr());
+    return -1;
+  }
+  else if(e > 0)
+    return -1;
+  else
+    return 0;
+}
+
 int conf_read_actions(void) {
   char buf[PATH_MAX];
   make_path(buf, conf_base, "actions");
-  return dir_foreach(buf, conf_add_action);
+  return conf_dir_foreach(buf, conf_add_action);
 }
 
 int conf_read_connections(void) {
   char buf[PATH_MAX];
   make_path(buf, conf_base, "connections");
-  return dir_foreach(buf, conf_add_connection);
+  return conf_dir_foreach(buf, conf_add_connection);
 }
 
 int conf_read_options(void) {
