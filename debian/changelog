@@ -1,14 +1,20 @@
+netbiff (0.9.11) frozen unstable; urgency=low
+
+  * New upstream release
+
+ -- Jeff King <peff@peff.net>  Wed, 28 May 2003 18:46:08 -0400
+
 netbiff (0.9.10) frozen unstable; urgency=low
 
   * New upstream release
 
- -- Jeff King <peff@coredump.peff.net>  Tue, 19 Feb 2002 11:16:46 -0500
+ -- Jeff King <peff@peff.net>  Tue, 19 Feb 2002 11:16:46 -0500
 
 netbiff (0.9.9) frozen unstable; urgency=low
 
   * New upstream release 
 
- -- Jeff King <peff@coredump.peff.net>  Tue,  9 Oct 2001 02:47:07 -0400
+ -- Jeff King <peff@peff.net>  Tue,  9 Oct 2001 02:47:07 -0400
 
 netbiff (0.9.8) frozen unstable; urgency=low
 
