@@ -1,3 +1,9 @@
+netbiff (0.9.7) frozen unstable; urgency=low
+
+  * New upstream release
+
+ -- Jeff King <peff@acm.org>  Fri, 15 Sep 2000 03:16:54 -0400
+
 netbiff (0.9.6) frozen unstable; urgency=low
 
   * New upstream release
