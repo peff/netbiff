@@ -79,11 +79,6 @@ cp netbiff/netbiff netbiff/netbiff-gtk
 
 (cd backend && make)
 
-%build backend-file
-CFLAGS="$RPM_OPT_FLAGS" \
-	./configure --prefix=%{prefix}
-make
-
 %install
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/{bin,man/man1}
