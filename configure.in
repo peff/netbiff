@@ -76,17 +76,21 @@ fi
 AC_MSG_CHECKING(--with-ssl argument)
 AC_ARG_WITH(ssl, 
   [  --with-ssl              Support SSL/TLS on backed (requires openssl >= 0.9.6)],
-  [ with_ssl=yes ],
+  [ 
+    with_ssl=yes 
+    AC_DEFINE(USE_SSL)
+  ],
   [ with_ssl=no  ])
 AC_MSG_RESULT([$with_ssl])
 if test "$with_ssl" = "yes"; then
   AC_CHECK_LIB(crypto, BIO_vprintf,
-    [ LDLIBS="$LDLIBS -lcrypto" ],
+    [ LIBSSL="$LIBSSL -lcrypto" ],
     AC_MSG_ERROR(Require libcrypto (>= 0.9.6) to build --with-ssl))
   AC_CHECK_LIB(ssl, SSL_new,
-    [ LDLIBS="$LDLIBS -lssl" ],
+    [ LIBSSL="-lssl $LIBSSL" ],
     AC_MSG_ERROR(Require libssl to build --with-ssl),
     [ -lcrypto ])
+  AC_SUBST(LIBSSL)
 fi
 
 AC_OUTPUT(netbiff/Makefile backend/Makefile Makefile netbiff.spec)

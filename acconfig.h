@@ -5,3 +5,6 @@
 
 /* Define if you want to use the text frontend. */
 #undef GUI_TEXT
+
+/* Define if you want to include SSL support. */
+#undef USE_SSL
