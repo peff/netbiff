@@ -1,10 +1,6 @@
 #include "gui.h"
 
-#ifndef GUI_TEXT
-
 GUI *gui_text_description = NULL;
-
-#else
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -191,5 +187,3 @@ GUI gui_text = {
   text_schedule_retry
 };
 GUI *gui_text_description = &gui_text;
-
-#endif /* GUI_TEXT */
