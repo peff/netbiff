@@ -85,16 +85,15 @@ CFLAGS="$RPM_OPT_FLAGS" \
 cp netbiff/netbiff netbiff/netbiff-text
 
 CFLAGS="$RPM_OPT_FLAGS" \
-	./configure --prefix=%{prefix} --disable-gtk
-(cd netbiff && make clean && make)
-cp netbiff/netbiff netbiff/netbiff-gtk
-
-(cd backend && make)
+	./configure --prefix=%{prefix} --enable-gtk
+make clean && make
 
 %install
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/{bin,man/man1}
 make prefix=$RPM_BUILD_ROOT/%{prefix} install-strip
+install -m 755 netbiff/netbiff-text $RPM_BUILD_ROOT/%{prefix}/bin/netbiff-text
+strip $RPM_BUILD_ROOT/%{prefix}/bin/netbiff-text
 
 %clean
 rm -r $RPM_BUILD_ROOT
@@ -109,7 +108,7 @@ rm -r $RPM_BUILD_ROOT
 
 %files client-text
 %defattr(-,root,root)
-/usr/bin/netbiff
+/usr/bin/netbiff-text
 
 %files backend-file
 %defattr(-,root,root)
@@ -121,7 +120,7 @@ rm -r $RPM_BUILD_ROOT
 
 %changelog
 * Sat May 13 2000 Jeff King <peff@acm.org>
-- Split into backend/client packages
+- Split into backend/client/doc packages
 
 * Fri May 12 2000 Jeff King <peff@acm.org>
 - Added netbiffd/netbiffd-imap packages
