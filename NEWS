@@ -1,3 +1,20 @@
+0.9.13:
+
+Lots of changes:
+ - dropped gtk-old interface
+ - retry support has changed; connections will be retried forever, but
+   with exponential backoff
+ - gtk interfaces handles resets better; the "main" image will be reset
+   only if all connections are unbiffed
+ - connections are unbiffed when they must be re-established (this stops the 
+   "network went down and it won't unbiff" problem)
+ - modules requesting data can now be fed directly from the on-disk
+   configuration rather than asking the user
+
+Most importantly, configuration has completely changed. It is now
+directory-based, rather than file-based. See the file doc/config.txt for more
+information.
+
 0.9.12:
 
 Fixed a nasty race condition bug in the text interface.
