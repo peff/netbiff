@@ -1,2 +1,2 @@
-$MMAKE_ROOT/installsh
+$MMAKE_ROOT/lib/installsh
 $MMAKE_ROOT/rules
