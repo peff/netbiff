@@ -30,35 +30,53 @@ binary-indep:
 
 binary-arch: build
 	dh_testdir
-	dh_clean
-	dh_installdirs
 
 # First do text
+	dh_clean
+	dh_installdirs
 	cp netbiff/netbiff-text netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
 	dh_installdeb -pnetbiff-client-text -Pdebian/tmp
+	dh_installdocs -pnetbiff-client-text -Pdebian/tmp
+	dh_undocumented -pnetbiff-client-text netbiff.1
+	dh_strip -pnetbiff-client-text -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-client-text -Pdebian/tmp
 	dh_gencontrol -pnetbiff-client-text -Pdebian/tmp
 	dh_builddeb -pnetbiff-client-text -Pdebian/tmp
 
 # And now gtk
+	dh_clean
+	dh_installdirs
 	cp netbiff/netbiff-gtk netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
 	dh_installdeb -pnetbiff-client-gtk -Pdebian/tmp
+	dh_installdocs -pnetbiff-client-gtk -Pdebian/tmp
+	dh_undocumented -pnetbiff-client-gtk netbiff.1
+	dh_strip -pnetbiff-client-gtk -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-client-gtk -Pdebian/tmp
 	dh_gencontrol -pnetbiff-client-gtk -Pdebian/tmp
 	dh_builddeb -pnetbiff-client-gtk -Pdebian/tmp
 
 # And now the backends...first imap
+	dh_clean
+	dh_installdirs
 	cp backend/netbiffd-imap debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-imap -Pdebian/tmp
+	dh_installdocs -pnetbiff-backend-imap -Pdebian/tmp
+	dh_undocumented -pnetbiff-backend-imap netbiff.1
+	dh_strip -pnetbiff-backend-imap -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-backend-imap -Pdebian/tmp
 	dh_gencontrol -pnetbiff-backend-imap -Pdebian/tmp
 	dh_builddeb -pnetbiff-backend-imap -Pdebian/tmp
   
 # And then file
+	dh_clean
+	dh_installdirs
 	cp backend/netbiffd debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-file -Pdebian/tmp
+	dh_installdocs -pnetbiff-backend-file -Pdebian/tmp
+	dh_undocumented -pnetbiff-backend-file netbiff.1
+	dh_strip -pnetbiff-backend-file -Pdebian/tmp
 	dh_shlibdeps -pnetbiff-backend-file -Pdebian/tmp
 	dh_gencontrol -pnetbiff-backend-file -Pdebian/tmp
 	dh_builddeb -pnetbiff-backend-file -Pdebian/tmp
