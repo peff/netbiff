@@ -9,10 +9,10 @@ Version:	%{version}
 Release:	%{release}
 Group:		X11/Utilities
 Copyright:	GPL
-Url:		http://www.cs.virginia.edu/~jrk3g/netbiff/
-Vendor:		Jeff King <peff@acm.org>
-Source:		http://www.cs.virginia.edu/~jrk3g/netbiff/%{name}-%{version}.tar.gz
-Packager:	Jeff King <peff@acm.org>
+Url:		http://peff.net/users/peff/netbiff/
+Vendor:		Jeff King <peff-netbiff@peff.net>
+Source:		http://peff.net/users/peff/netbiff/%{name}-%{version}.tar.gz
+Packager:	Jeff King <peff@peff.net>
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
