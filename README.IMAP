@@ -30,7 +30,7 @@ Examples:
 Once authentication has been established (either through login or preauth),
 the process waits for folder specifications or poll requests. When a poll
 request is given, the IMAP4 STATUS command is used to determine the number of
-messages in each folder marked with the \Recent flag.
+messages in each folder marked with the \Unseen flag.
 
 The logic is such:
 
