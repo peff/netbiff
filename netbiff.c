@@ -37,8 +37,8 @@ int main(int argc, char **argv) {
       case '?': printhelp(stderr); exit(1);
     }
   }
-  argv += optind;
-  argc -= optind;
+  argv += optind - 1;
+  argc -= optind - 1;
 
   if(gui_init(&argc, &argv, gui_name) < 0)
     xdie("unable to init interface");
