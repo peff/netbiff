@@ -1,6 +1,7 @@
-%define	name	@package@
-%define	version	@version@
+%define	name	@PACKAGE@
+%define	version	@VERSION@
 %define	release	1
+%define prefix  /usr
 
 Summary:	A more featureful version of the traditional biff
 Name:		%{name}
@@ -25,14 +26,14 @@ pluggable interfaces (GTK and text-based), and arbitrary actions on biff.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" \
-	./configure --prefix=/usr
+	./configure --prefix=%{prefix}
 make
 
 %install
 if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
-mkdir -p $RPM_BUILD_ROOT/usr/{bin,man/man1}
-make prefix=$RPM_BUILD_ROOT/usr install
-find $RPM_BUILD_ROOT/usr -type f -print | sed "s@^$RPM_BUILD_ROOT@@g" > %{name}-%{version}-filelist
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/{bin,man/man1}
+make prefix=$RPM_BUILD_ROOT/%{prefix} install
+find $RPM_BUILD_ROOT/%{prefix} -type f -print | sed "s@^$RPM_BUILD_ROOT@@g" > %{name}-%{version}-filelist
 
 %clean
 rm -r $RPM_BUILD_ROOT
