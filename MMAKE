@@ -1,2 +1,3 @@
+$MMAKE_DIST
 $MMAKE_ROOT/lib/installsh
 $MMAKE_ROOT/rules
