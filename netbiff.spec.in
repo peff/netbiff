@@ -21,28 +21,67 @@ program). Features include BSD mailbox and IMAP4 support, a backend
 plug-in system (for other protocols), arbitrary numbers of backends,
 pluggable interfaces (GTK and text-based), and arbitrary actions on biff.
 
-%package netbiffd
+%package client-text
+Summary: Mail notification utility text client
+Group: Console/Utilities
+
+%description client-text
+Netbiff is an advanced version of the traditional biff (a mail-checking
+program). Features include BSD mailbox and IMAP4 support, a backend
+plug-in system (for other protocols), arbitrary numbers of backends, and
+arbitrary actions on biff.
+
+This is the text-only version.
+
+%package client-gtk
+Summary: Mail notification utility GTK client
+Group: X11/Utilities
+
+%description client-gtk
+Netbiff is an advanced version of the traditional biff (a mail-checking
+program). Features include BSD mailbox and IMAP4 support, a backend
+plug-in system (for other protocols), arbitrary numbers of backends, and
+arbitrary actions on biff.
+
+This is the GTK version (it also supports the text interface).
+
+%package backend-file
 Summary: Netbiff backend for filesystems
 Group: X11/Utilities
 
-%description netbiffd
+%description backend-file
 Netbiffd is meant to be used as a backend to the netbiff mail checking
 program. Netbiffd uses file system size checks and access/modification times
 to check for file update (making it more versatile than simple mail folder
 checking).
 
-%package netbiffd-imap
+%package backend-imap
 Summary: Netbiff backend for IMAP
 Group: X11/Utilities
 
-%description netbiffd-imap
+%description backend-imap
 Netbiffd-imap is meant to be used as a backend to the netbiff mail checking
 program.  Netbiffd-imap checks for mail over IMAP connections.
 
 %prep
 %setup -q
 
-%build
+%build client-text
+CFLAGS="$RPM_OPT_FLAGS" \
+	./configure --prefix=%{prefix} --disable-gtk
+make
+
+%build client-gtk
+CFLAGS="$RPM_OPT_FLAGS" \
+	./configure --prefix=%{prefix} --enable-gtk
+make
+
+%build backend-imap
+CFLAGS="$RPM_OPT_FLAGS" \
+	./configure --prefix=%{prefix}
+make
+
+%build backend-file
 CFLAGS="$RPM_OPT_FLAGS" \
 	./configure --prefix=%{prefix}
 make
@@ -58,15 +97,23 @@ rm -r $RPM_BUILD_ROOT
 %files
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc/* images
 %defattr(-,root,root)
+
+%files client-gtk
 /usr/bin/netbiff
 
-%files netbiffd
+%files client-text
+/usr/bin/netbiff
+
+%files backend-file
 /usr/bin/netbiffd
 
-%files netbiffd-imap
+%files backend-imap
 /usr/bin/netbiffd-imap
 
 %changelog
+* Sat May 13 2000 Jeff King <peff@acm.org>
+- Split into backend/client packages
+
 * Fri May 12 2000 Jeff King <peff@acm.org>
 - Added netbiffd/netbiffd-imap packages
 
