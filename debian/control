@@ -1,0 +1,81 @@
+Source: netbiff
+Section: mail
+Priority: optional
+Maintainer: Jeff King <peff@acm.org>
+
+Package: netbiff
+Architecture: any
+Recommends: netbiff-backend
+Description: Mail notification utility
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This package contains no files. You will need to select a netbiff client
+ and appropriate backend(s).
+
+Package: netbiff-backend
+Architecture: any
+Recommends: netbiff
+Description: Mail notification utility backend
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This package contains no files. You will need to select a netbiff client
+ and appropriate backend(s).
+
+Package: netbiff-client-text
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: netbiff-backend
+Provides: netbiff
+Conflicts: netbiff-client-gtk
+Replaces: netbiff-client-gtk
+Description: Text-based mail notification utility
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This package contains the text-based netbiff client.
+
+Package: netbiff-client-gtk
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: netbiff-backend
+Provides: netbiff
+Conflicts: netbiff-client-text
+Replaces: netbiff-client-text
+Description: GTK-based mail notification utility
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This package contains the GTK-based netbiff client.
+
+Package: netbiff-backend-imap
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: netbiff
+Provides: netbiff-backend
+Description: IMAP backend for netbiff
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This backend supports connection to IMAP servers for the retrieval
+ of mail information.
+
+Package: netbiff-backend-file
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: netbiff
+Provides: netbiff-backend
+Description: Filesystem backend for netbiff
+ Netbiff is an enhanced version of the traditional biff, featuring
+ multiple connections, user-defined biff/reset actions, and backend
+ support for many mail clients.
+ .
+ This backend supports the examination of data through file system
+ attributes to determine updates.
+

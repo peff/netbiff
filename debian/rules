@@ -1,0 +1,106 @@
+#!/usr/bin/make -f
+
+cfgflags = --prefix=/usr
+
+build-text: build-text-stamp
+build-text-stamp:
+	./configure $(cfgflags) --disable-gtk --enable-text
+	$(MAKE)
+	touch build-text-stamp
+
+build-gtk: build-gtk-stamp
+build-gtk-stamp:
+	./configure $(cfgflags) --enable-gtk
+	$(MAKE)
+	touch build-gtk-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-text-stamp build-gtk-stamp install-text-stamp install-gtk-stamp
+	$(MAKE) clean
+	$(MAKE) distclean
+	dh_clean
+
+install-text: install-text-stamp
+install-text-stamp: build-text-stamp
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	$(MAKE) prefix=`pwd`/debian/netbiff-client-text install
+	$(MAKE) prefix=`pwd`/debian/netbiff-backend-file install
+	$(MAKE) prefix=`pwd`/debian/netbiff-backend-imap install
+	touch install-text-stamp
+
+install-gtk: install-gtk-stamp
+install-gtk-stamp: build-gtk-stamp
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	$(MAKE) prefix=`pwd`/debian/netbiff-client-gtk install
+	touch install-gtk-stamp
+
+netbiff-client-gtk: install-gtk
+	dh_testdir -pnetbiff-client-gtk
+	dh_testroot -pnetbiff-client-gtk
+	dh_installdirs -pnetbiff-client-gtk
+	dh_movefiles -pnetbiff-client-gtk usr/bin/netbiff
+	dh_installdocs -pnetbiff-client-gtk
+	dh_installchangelogs -pnetbiff-client-gtk
+	dh_strip -pnetbiff-client-gtk
+	dh_compress -pnetbiff-client-gtk
+	dh_fixperms -pnetbiff-client-gtk
+	dh_installdeb -pnetbiff-client-gtk
+	dh_shlibdeps -pnetbiff-client-gtk
+	dh_gencontrol -pnetbiff-client-gtk
+	dh_md5sums -pnetbiff-client-gtk
+	dh_builddeb -pnetbiff-client-gtk
+
+
+netbiff-client-text: install-text
+	dh_testdir -pnetbiff-client-text
+	dh_testroot -pnetbiff-client-text
+	dh_installdirs -pnetbiff-client-text
+	dh_movefiles -pnetbiff-client-text usr/bin/netbiff
+	dh_installdocs -pnetbiff-client-text
+	dh_installchangelogs -pnetbiff-client-text
+	dh_strip -pnetbiff-client-text
+	dh_compress -pnetbiff-client-text
+	dh_fixperms -pnetbiff-client-text
+	dh_installdeb -pnetbiff-client-text
+	dh_shlibdeps -pnetbiff-client-text
+	dh_gencontrol -pnetbiff-client-text
+	dh_md5sums -pnetbiff-client-text
+	dh_builddeb -pnetbiff-client-text
+
+netbiff-backend-imap: install-text
+	dh_testdir -pnetbiff-backend-imap
+	dh_testroot -pnetbiff-backend-imap
+	dh_installdirs -pnetbiff-backend-imap
+	dh_movefiles -pnetbiff-backend-imap usr/bin/netbiffd-imap
+	dh_installdocs -pnetbiff-backend-imap
+	dh_installchangelogs -pnetbiff-backend-imap
+	dh_strip -pnetbiff-backend-imap
+	dh_compress -pnetbiff-backend-imap
+	dh_fixperms -pnetbiff-backend-imap
+	dh_installdeb -pnetbiff-backend-imap
+	dh_shlibdeps -pnetbiff-backend-imap
+	dh_gencontrol -pnetbiff-backend-imap
+	dh_md5sums -pnetbiff-backend-imap
+	dh_builddeb -pnetbiff-backend-imap
+
+netbiff-backend-file: install-text
+	dh_testdir -pnetbiff-backend-file
+	dh_testroot -pnetbiff-backend-file
+	dh_installdirs -pnetbiff-backend-file
+	dh_movefiles -pnetbiff-backend-file usr/bin/netbiffd
+	dh_installdocs -pnetbiff-backend-file
+	dh_installchangelogs -pnetbiff-backend-file
+	dh_strip -pnetbiff-backend-file
+	dh_compress -pnetbiff-backend-file
+	dh_fixperms -pnetbiff-backend-file
+	dh_installdeb -pnetbiff-backend-file
+	dh_shlibdeps -pnetbiff-backend-file
+	dh_gencontrol -pnetbiff-backend-file
+	dh_md5sums -pnetbiff-backend-file
+	dh_builddeb -pnetbiff-backend-file
