@@ -1,8 +1,22 @@
 This file documents changes made to Netbiff through various versions.
 
+0.9.10:
+	Add NETBIFFD_IGNORE_ATIME option
+
+0.9.9:
+	Update contact information in specfile
+
+0.9.8:
+	FreeBSD porting fixes
+0.9.7:
+	Fix compile problems when building --without-ssl
+
+0.9.6:
+	SSL support for netbiffd-imap
+
 0.9.4b:
 	Fixed bug in netbiffd which prevented reset for some mailers
-		(specifically Emacs).
+		(specifically Emacs)
 
 0.9.4a:
 	Redhat/Debian packaging updates
