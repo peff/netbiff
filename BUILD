@@ -1,4 +1,3 @@
-README
 all
 install
 clean

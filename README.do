@@ -1,2 +1,0 @@
-dependon VERSION README.in 
-cat VERSION README.in >README
