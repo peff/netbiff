@@ -406,7 +406,7 @@ static char *gtk_request_data(const char *prompt, int hidden) {
   gtk_grab_add(dialog);
 
   while(!request_buffer)
-    g_main_iteration(FALSE);
+    g_main_iteration(TRUE);
 
   retval = strdup(request_buffer);
 
