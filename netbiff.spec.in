@@ -45,6 +45,18 @@ arbitrary actions on biff.
 
 This is the GTK version (it also supports the text interface).
 
+%package doc
+Summary: Documentation for netbiff
+Group: Documentation
+
+%description doc
+Netbiff is an advanced version of the traditional biff (a mail-checking
+program). Features include BSD mailbox and IMAP4 support, a backend
+plug-in system (for other protocols), arbitrary numbers of backends, and
+arbitrary actions on biff.
+
+This is the documentation.
+
 %package backend-file
 Summary: Netbiff backend for filesystems
 Group: X11/Utilities
@@ -87,20 +99,24 @@ make prefix=$RPM_BUILD_ROOT/%{prefix} install-strip
 %clean
 rm -r $RPM_BUILD_ROOT
 
-%files
+%files doc
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc/* images
 %defattr(-,root,root)
 
 %files client-gtk
+%defattr(-,root,root)
 /usr/bin/netbiff
 
 %files client-text
+%defattr(-,root,root)
 /usr/bin/netbiff
 
 %files backend-file
+%defattr(-,root,root)
 /usr/bin/netbiffd
 
 %files backend-imap
+%defattr(-,root,root)
 /usr/bin/netbiffd-imap
 
 %changelog
