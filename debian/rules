@@ -22,7 +22,7 @@ backends:
 clean:
 	-make distclean
 	rm -f $(custom_targets)
-	dh_clean
+	dh_clean -k
 
 binary: binary-arch binary-indep
 
@@ -32,7 +32,7 @@ binary-arch: build
 	dh_testdir
 
 # First do text
-	dh_clean
+	dh_clean -k
 	dh_installdirs
 	cp netbiff/netbiff-text netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
@@ -46,7 +46,7 @@ binary-arch: build
 	dh_builddeb -pnetbiff-client-text -Pdebian/tmp
 
 # And now gtk
-	dh_clean
+	dh_clean -k
 	dh_installdirs
 	cp netbiff/netbiff-gtk netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/tmp install)
@@ -60,7 +60,7 @@ binary-arch: build
 	dh_builddeb -pnetbiff-client-gtk -Pdebian/tmp
 
 # And now the backends...first imap
-	dh_clean
+	dh_clean -k
 	dh_installdirs
 	cp backend/netbiffd-imap debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-imap -Pdebian/tmp
@@ -73,7 +73,7 @@ binary-arch: build
 	dh_builddeb -pnetbiff-backend-imap -Pdebian/tmp
   
 # And then file
-	dh_clean
+	dh_clean -k
 	dh_installdirs
 	cp backend/netbiffd debian/tmp/usr/bin
 	dh_installdeb -pnetbiff-backend-file -Pdebian/tmp
