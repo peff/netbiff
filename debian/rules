@@ -33,52 +33,36 @@ binary-indep:
 binary-arch: build
 	dh_testdir
 
-# First do text
 	dh_installdirs -pnetbiff-text
+	dh_installdirs -pnetbiff-gtk
+	dh_installdirs -pnetbiffd-imap
+	dh_installdirs -pnetbiffd-file
+
+# First do text
 	cp netbiff/netbiff-text netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/netbiff-text install)
-	dh_installdeb -pnetbiff-text
-	dh_installdocs -pnetbiff-text
-	dh_installchangelogs -pnetbiff-text
-	dh_undocumented -pnetbiff-text netbiff.1
-	dh_strip -pnetbiff-text
-	dh_shlibdeps -pnetbiff-text 
-	dh_gencontrol -pnetbiff-text
-	dh_builddeb -pnetbiff-text 
-
 # And now gtk
-	dh_installdirs -pnetbiff-gtk
 	cp netbiff/netbiff-gtk netbiff/netbiff
 	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk install)
-	dh_installdeb -pnetbiff-gtk 
-	dh_installdocs -pnetbiff-gtk
-	dh_installchangelogs -pnetbiff-gtk
-	dh_undocumented -pnetbiff-gtk netbiff.1
-	dh_strip -pnetbiff-gtk 
-	dh_shlibdeps -pnetbiff-gtk
-	dh_gencontrol -pnetbiff-gtk
-	dh_builddeb -pnetbiff-gtk
-
 # And now the backends...first imap
 	dh_installdirs -pnetbiffd-imap
 	cp backend/netbiffd-imap debian/netbiffd-imap/usr/bin/netbiffd-imap
-	dh_installdeb -pnetbiffd-imap
-	dh_installdocs -pnetbiffd-imap
-	dh_installchangelogs -pnetbiffd-imap
-	dh_undocumented -pnetbiffd-imap netbiffd-imap.1
-	dh_strip -pnetbiffd-imap
-	dh_shlibdeps -pnetbiffd-imap
-	dh_gencontrol -pnetbiffd-imap
-	dh_builddeb -pnetbiffd-imap
-  
 # And then file
 	dh_installdirs -pnetbiffd-file
 	cp backend/netbiffd debian/netbiffd-file/usr/bin
-	dh_installdeb -pnetbiffd-file
-	dh_installdocs -pnetbiffd-file
-	dh_installchangelogs -pnetbiffd-file
+
+	dh_installdeb -a
+	dh_installdocs -a
+	dh_installchangelogs -a
+
+	dh_undocumented -pnetbiff-text netbiff.1
+	dh_undocumented -pnetbiff-gtk netbiff.1
+	dh_undocumented -pnetbiffd-imap netbiffd-imap.1
 	dh_undocumented -pnetbiffd-file netbiffd.1
-	dh_strip -pnetbiffd-file
-	dh_shlibdeps -pnetbiffd-file
-	dh_gencontrol -pnetbiffd-file
-	dh_builddeb -pnetbiffd-file
+
+	dh_strip -a
+	dh_compress -a
+
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_builddeb -a
