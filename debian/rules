@@ -6,15 +6,17 @@ custom_targets = netbiff/netbiff-text netbiff/netbiff-gtk
 build: $(custom_targets)
 
 netbiff/netbiff-text:
-	(cd netbiff && ./configure $(cfgflags) --disable-gtk; \
-	 $(MAKE) clean && $(MAKE))
+	./configure $(cfgflags) --disable-gtk
+	(cd netbiff && $(MAKE) clean && $(MAKE))
+	cp netbiff/netbiff netbiff/netbiff-text
 
-netbiff/netbiff-text:
-	(cd netbiff && ./configure $(cfgflags) --enable-gtk; \
-	 $(MAKE) clean && $(MAKE))
+netbiff/netbiff-gtk:
+	./configure $(cfgflags) --enable-gtk
+	(cd netbiff && $(MAKE) clean && $(MAKE))
+	cp netbiff/netbiff netbiff/netbiff-gtk
 
 clean:
-	make distclean
+	-make distclean
 	rm -f $(custom_targets)
 	dh_clean
 
