@@ -25,7 +25,7 @@ backends:
 clean:
 	-make distclean
 	rm -f $(custom_targets)
-	dh_clean -k
+	dh_clean
 
 binary: binary-arch binary-indep
 
@@ -44,12 +44,12 @@ binary-arch: build
 	(cd netbiff && make prefix=`pwd`/../debian/netbiff-gtk/$(prefix) install)
 # And now the backends...first imap
 	install -m 755 backend/netbiffd-imap \
-		debian/netbiffd-imap/usr/bin/netbiffd-imap
+		debian/netbiffd-imap/$(prefix)/bin/netbiffd-imap
 # And then file
-	install -m 755 backend/netbiffd debian/netbiffd-file/usr/bin
+	install -m 755 backend/netbiffd debian/netbiffd-file/$(prefix)/bin
 
 	dh_installdeb -a
-	dh_installdocs -a AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc
+	dh_installdocs -A AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc
 	dh_installchangelogs -a
 
 	dh_undocumented -pnetbiff-text netbiff.1
