@@ -1,0 +1,50 @@
+%define	name	@package@
+%define	version	@version@
+%define	release	1
+
+Summary:	A more featureful version of the traditional biff
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Group:		X11/Utilities
+Copyright:	GPL
+Url:		http://www.cs.virginia.edu/~jrk3g/netbiff/
+Vendor:		Jeff King <peff@acm.org>
+Source:		http://www.cs.virginia.edu/~jrk3g/netbiff/%{name}-%{version}.tar.gz
+Packager:	Jeff King <peff@acm.org>
+Buildroot:	/tmp/%{name}-%{version}-root
+
+%description
+Netbiff is an advanced version of the traditional biff (a mail-checking
+program). Features include BSD mailbox and IMAP4 support, a backend
+plug-in system (for other protocols), arbitrary numbers of backends,
+pluggable interfaces (GTK and text-based), and arbitrary actions on biff.
+
+%prep
+%setup -q
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" \
+	./configure --prefix=/usr
+make
+
+%install
+if [ -d $RPM_BUILD_ROOT ]; then rm -r $RPM_BUILD_ROOT; fi
+mkdir -p $RPM_BUILD_ROOT/usr/{bin,man/man1}
+make prefix=$RPM_BUILD_ROOT/usr install
+find $RPM_BUILD_ROOT/usr -type f -print | sed "s@^$RPM_BUILD_ROOT@@g" > %{name}-%{version}-filelist
+
+%clean
+rm -r $RPM_BUILD_ROOT
+
+%files -f %{name}-%{version}-filelist
+%doc AUTHORS COPYING ChangeLog INSTALL NEWS README TODO doc/* images
+%defattr(-,root,root)
+
+%changelog
+* Fri Jan 28 2000 Johnny Accot <accot@cena.fr>
+  [netbiff-0.9.2-1]
+- Initial packaging of version 0.9.2.
+
+* Tue May 09 2000 Jeff King <peff@acm.org>
+- Moved spec file to netbiff.spec.in for autogen of name/version
