@@ -21,12 +21,12 @@ netbiff/netbiff-gtk:
 	(cd netbiff && $(MAKE) clean && $(MAKE))
 	cp netbiff/netbiff netbiff/netbiff-gtk
 
-backend-plain:
+$(backend_plain):
 	./configure $(cfgflags)
 	(cd backend && $(MAKE) clean && $(MAKE))
 	cp backend/netbiffd-imap backend/netbiffd-imap-plain
 
-backend-ssl:
+$(backend_ssl):
 	./configure $(cfgflags)
 	(cd backend && $(MAKE) clean && $(MAKE))
 	cp backend/netbiffd-imap backend/netbiffd-imap-ssl
