@@ -1,0 +1,92 @@
+Netbiff is split into two parts. The front end is the interface to the user
+and is driven by user interaction and events from the back ends.  A single
+front end can support an arbitrary number of back ends (each referred to as a
+connection).  They communicate using a simple human-readable protocol.
+
+A connection is established when a front end unit executes a back end unit
+with the back end's standard input/output redirected to the front end.
+All communication occurs of this byte stream channel.
+
+Each protocol unit consists of a line of text delimited by whitespace and
+ending with a newline.  Requests are of the form
+<COMMAND> [ARGUMENTS]\n
+
+and responses are either of the form
+<STATUS> [EXPLANATION]\n
+or
+* <EVENT> [ARGUMENTS]\n
+
+Valid request commands are:
+
+FOLDER -- add the specified folder to the list of folders to be checked
+	(either on a POLL or to be interrupt-driven).  The argument specifies
+	the folder.
+
+POLL -- If an argument is given, poll the specified folder. Otherwise, poll
+	all previously specified folders. 
+
+DATARESPONSE -- The response to a requested data item.  The first
+space-delimited word is the tag of the data item (as given by the module's
+request); the remainder of the line is the data item itself (which is not
+allowed to contain newlines).
+
+
+QUIT -- terminate the session.
+
+
+Every request must receive a status response (though it is not necessarily
+the next piece of data).  In addition, a back end must send a status response
+upon startup to indicate either success or failure of its startup sequence.
+Valid response statuses are:
+
+OK -- the specified request completed successfully.
+
+NO -- an error occurred while processing the request.  This is often
+	accompanied by a human readable (i.e., suitable for user display)
+	explanation.
+
+BAD -- the request was malformed and should not be repeated.  This is often
+	accompanied by a human readable explanation and is typically
+	caused by programming errors.
+
+
+Event responses are referred to as "untagged responses" in the code (this
+term is borrowed from IMAP, which uses the '* ' syntax to indicate data that
+is not a direct status response to a request.  In IMAP, all status responses
+are tagged to match requests, and thus untagged responses are referred to as
+such. Here it makes no real sense).  Back ends may send untagged responses as
+a result of a request, but may also send them at its discretion (to
+facilitate non-polled checking). The valid events are:
+
+UPDATE -- The argument is a folder which has been updated. The user should be
+	notified.
+
+RESET -- The argument is a folder which no longer contains new information.
+	Any events which occured as a response to the UPDATE of that folder 
+	should be cancelled (e.g., the flag should go down).
+
+DATAREQUEST -- The module requests a piece of data from the frontend.  The
+	first whitespace-delimited argument is a tag for the data item. The
+	remainder of the line is a human-readable description (suitable for
+	presenting to a user).
+
+
+An example session follows:
+(front end messages are prepended with F:, back end messages with B:)
+B: OK Howdy.
+F: FOLDER
+B: BAD Command FOLDER requires an argument.
+F: FOLDER foo
+B: OK Folder foo added.
+F: FOLDER bar
+B: OK Folder bar added.
+F: POLL
+B: * UPDATE foo
+B: OK Poll completed
+F: FOLDER bleep
+B: NO Out of memory
+F: POLL foo
+B: * RESET foo
+F: QUIT
+B: OK Bye
+

@@ -1,0 +1,14 @@
+This is the standard netbiff file system backend.  It will understand any
+file regardless of format since it relies on sizes and access time.  It is
+run without any arguments.  The logic for biffing is such:
+
+if file has been read more recently than written (atime > mtime)
+  send reset
+else if file has been written more recently AND file size has increased
+  send update
+else
+  do nothing
+
+Netbiffd respects the following environment variables:
+  NETBIFFD_IGNORE_ATIME - If set to a non-zero integer, don't take file times
+                          into account when sending updates.

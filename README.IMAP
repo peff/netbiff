@@ -1,0 +1,34 @@
+netbiffd-imap is the netbiff backend that connects to IMAP4 servers. It can
+run in both regular login mode and in preauthenticated mode (preauthenticated
+mode is for when you have a user level account on the imap server).
+
+It can be started as:
+
+netbiffd-imap preauth /etc/rimapd
+	This indicates a preauthenticated session in which /etc/rimapd (the
+traditional location for such sessions) is executed.  
+
+or
+
+netbiffd-imap login hostname username [password]
+	This indicates that a login should be performed with the given
+username and password.  Hopefully the user will eventually be prompted for
+such information (which would require the passing of arbitrary data fields
+between front and back ends), as putting it on the command line is poor.  
+	If the password is omitted, it will be requested with item tag
+"secret/password".
+
+Once authentication has been established (either through login or preauth),
+the process waits for folder specifications or poll requests. When a poll
+request is given, the IMAP4 STATUS command is used to determine the number of
+messages in each folder marked with the \Recent flag.
+
+The logic is such:
+
+if the number of recent messages has increased
+  send update
+else if the number of recent messages has decreased
+  send reset
+else
+  do nothing
+

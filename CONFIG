@@ -1,0 +1,121 @@
+Configuration is read from a directory structure which is ordinarily located
+in "$HOME/.netbiff". The structure is organized as follows:
+
+.netbiff/frequency
+  This file should contain a text integer that indicates the polling
+frequency in seconds.
+
+.netbiff/actions/
+  This directory should contain a file for every defined action. The name of
+the file indicates the name of the action. The contents of the file will be
+passed to "sh -c" when the action is executed. There are a few default
+actions defined internally. They are:
+  - beep - cause an audible beep
+  - image - cause the interface to change the mailbox image to "biffed" state
+  - image-reset - change the image back to "unbiffed" state
+
+.netbiff/connections/
+  This directory should contain a sub-directory for every defined connection.
+The name of the sub-directory indicates the name of the connection. The
+contents of the directory are described below.
+
+.netbiff/connections/*/command
+  This file should contain the command to be passed to "sh -c" to run the
+appropriate backend.
+
+.netbiff/connections/*/folders
+  This file should contain a list of folders, one per line, that should be
+checked for this connection.
+
+.netbiff/connections/*/update
+  This file should contain a list of actions, one per line, that should be
+performed when the connection indicates an update (i.e., when it's biffed).
+
+.netbiff/connections/*/reset
+  This file should contain a list of actions, one per line, that should be
+performed when the connection is reset (i.e., unbiffed).
+
+.netbiff/connections/*/*
+  Any other contents of a connection directory will be ignored unless
+specifically requested by the backend connection. For example, the
+netbiffd-imap backend may request the data "secret/password". In this case,
+the file .netbiff/connections/*/secret/password will be accessed.
+
+.netbiff/connections/*/secret
+  This directory, if it exists, will contain backend data (such as
+secret/password). If it exists, its permissions are checked when netbiff
+starts; if it is accessible by group or world permissions, then netbiff will
+report an error and halt.
+
+
+EXAMPLES
+
+Here is a short shell script to create a simple netbiff setup:
+
+mkdir .netbiff
+mkdir .netbiff/actions
+mkdir .netbiff/connections
+# update every 30 seconds 
+echo 30 >.netbiff/frequency
+# make one IMAP connection to mail.example.org, username foo
+mkdir .netbiff/connections/example
+echo \
+  'exec netbiffd-imap login mail.example.org peff' \
+  >.netbiff/connections/example/command
+# let's just check the INBOX
+echo INBOX >.netbiff/connections/example/folders
+# and let's have it beep and change the image on biff
+(echo beep; echo image) >.netbiff/connections/example/update
+# and reset the image when it unbiffs
+(echo image-reset) >.netbiff/connections/example/reset
+# Done.
+
+Here's an example that shows converting from the old .netbiffrc format to the
+new format. 
+
+--- old .netbiffrc --
+frequency 30
+action "foo" "echo A biff that biffs... | mail $USER"
+connection
+	name "local mail"
+	command "/usr/local/bin/netbiffd"
+	update "image"
+	update "beep"
+	reset "image-reset"
+	folder "/var/spool/mail/mylogin"
+	folder "foo"
+endconnection
+connection name "remote mail"
+        command 
+	  "ssh remotehost /usr/local/bin/netbiffd-imap preauth /etc/rimapd"
+        folder "INBOX"
+        update "beep"
+        update "foo" 
+endconnection
+
+--- new .netbiff shell script ---
+mkdir .netbiff; cd .netbiff
+  echo 30 >frequency
+
+  mkdir actions; cd actions
+    echo 'echo a biff that biffs... | mail $USER' >foo
+  cd ..
+
+  mkdir connections; cd connections
+    mkdir local; cd local
+      echo /usr/local/bin/netbiffd >command
+      (echo image; echo beep) >update
+      echo image-reset >reset
+      echo /var/spool/mail/mylogin >folders
+      echo foo >>folders
+    cd ..
+    mkdir remote; cd remote
+      echo \
+        "ssh remotehost /usr/local/bin/netbiffd-imap preauth /etc/rimapd" \
+        >command
+      echo INBOX >folder
+      (echo beep; echo foo) >update
+      touch reset
+    cd ..
+  cd ..
+cd ..

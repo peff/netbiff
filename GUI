@@ -1,0 +1,56 @@
+NetBiff supports pluggable front-ends (decided upon at runtime from the
+possible list).  Right now the selection code is pretty lousy.  It currently
+uses the GTK interface if it has been compiled in and if the DISPLAY variable
+is set.  If not, it uses the text interface.  This should probably be
+extended to support N interfaces using command line arguments or a
+configuration file.
+
+Currently an interface needs to support an event loop which provides timers
+and file descriptor events (this is simple to do from scratch, but most GUI
+event loops support it).  It also needs to provide the following callable C
+functions (any interface using non-C language bindings will probably need
+to provide a simple C wrapper):
+
+void flagup(const Connection *) -- this is called when the "image" action is
+        specified and a folder is biffed
+
+void flagdown(const Connection *) -- like flagup, but not
+
+void init(int *, char **) -- this function is guaranteed to be called before
+        any other. It should prepare any data structures, etc, for use in the
+        other functions.  The arguments are a pointer to argc and argv.
+
+int display_message(char *, va_list) -- displays a message to the user. The
+        fmt and va_list follow the conventions of the printf() family.
+        Returns 0 on success, -1 on error.
+
+void event_loop() -- enter the event loop for the interface
+
+void beep() -- cause a beep on the user's terminal (triggered by the "beep"
+        action)
+
+void add_fd(const Connection *, int) -- add the connection to the event loop
+        using a specified type (either GUI_FD_READ or GUI_FD_WRITE). On the
+        specified event, either proto_do_conn_input() or
+        proto_do_conn_output() should be called (as appropriate by the type)
+        with the specified connection as an argument.
+
+void delete_fd(const Connection *, int) -- remove a connection from the event
+        loop for the specified type (in other words, no longer respond on
+        that event).
+
+char *request_data(const char *, int) -- request a piece of data from the
+        user; the function should return a NUL-terminated string allocated
+        from the heap containing the user's response.  The second argument
+        indicates whether or not the item should be "hidden" on the screen
+        (i.e., it is a password).
+
+void register_connections() -- this function is called once before the main
+        loop starts; at this point all connections have been added and the
+        interface may do any setup related to them
+
+void schedule_retry(time_t) -- a connection has indicated that it would like
+        proto_do_retries() to be called at that time.
+
+These should all be packaged as function pointers into a GUI object and some
+method of selection should be provided in gui_init().
