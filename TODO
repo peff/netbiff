@@ -2,4 +2,7 @@ TODO list:
 
 More backends (POP, maildirs, NNTP)
 More robust testing (it works for me...)
-
+Better sharing of flag image (if two go up and one goes down, the image
+	becomes unset)
+Better handling of negative geometry positions (GTK doesn't appear to have a
+	good way of doing this). For example, -0-0 is equal to +0+0.

@@ -1,5 +1,10 @@
 This file documents changes made to Netbiff through various versions.
 
+0.9.4:
+	Revamped GTK gui (old one is available as gtk-old)
+	Added GUI-specific arguments (after a -- on command line)
+	GTK GUI now supports -geometry after --.
+
 0.9.3:
 	Added mailbox resets.
 	Changed .netbiffrc syntax.

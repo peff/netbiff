@@ -1,3 +1,11 @@
+0.9.4:
+
+The GTK interface has been changed to be a little more useful. The old one is
+available by doing "netbiff --gui=gtk-old".  Interfaces can now have their
+own command line options, separated from the other options by --.  The GTK
+interface supports -geometry. So, for example, "netbiff --gui=gtk --
+-geometry +300+200" will position the window at (300,200). 
+
 0.9.3:
 
 I've implemented folder reset commands (these are triggered when a folder
