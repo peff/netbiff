@@ -202,6 +202,9 @@ static void gtk_gui_init(int *argc, char ***argv) {
   char **a;
 
   gtk_init(argc, argv);
+  /* The original argv may not be available, so gtk's guess for the
+   * program class will be wrong. */
+  gdk_set_program_class("Netbiff");
 
   main_window_create();
   pixmap_create();
