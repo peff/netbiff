@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(netbiff, 0.9.10)
+AM_INIT_AUTOMAKE(netbiff, 0.9.11)
 AM_CONFIG_HEADER(config.h)
 
 dnl Make sure we have a working compiler.
@@ -22,10 +22,6 @@ AC_PROG_LN_S
 
 AC_PROG_YACC
 AM_PROG_LEX
-dnl Hmm. This is a kludge to support -d in bison, but automake
-dnl seems pretty braindead about it.
-AC_MSG_WARN(Adding -d option to $YACC. Hope this doesn't break anything.)
-YACC="$YACC -d"
 
 dnl Checks for header files.
 AC_HEADER_SYS_WAIT
@@ -68,9 +64,8 @@ AC_ARG_ENABLE(gtk,
   [enable_gtk=yes])
 AC_MSG_RESULT($enable_gtk)
 if test "$enable_gtk" = "yes"; then
-  AM_PATH_GTK(1.2.0, 
-    AC_DEFINE(GUI_GTK),
-    AC_MSG_WARN(Hmmm. You specified GTK but I couldn't find it. Disabling...))
+  PKG_CHECK_MODULES(GTK, gtk+-2.0)
+  AC_DEFINE(GUI_GTK)
 fi
 
 AC_MSG_CHECKING(--with-ssl argument)

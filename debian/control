@@ -1,7 +1,7 @@
 Source: netbiff
 Section: mail
 Priority: optional
-Maintainer: Jeff King <peff@acm.org>
+Maintainer: Jeff King <peff@peff.net>
 
 Package: netbiff-text
 Architecture: any
