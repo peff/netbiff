@@ -1,4 +1,6 @@
 hier() {
+  install_verbose_on
+
   d "$auto_home/bin" -1 -1 0755
 
   c "$auto_home/bin" netbiff -1 -1 0755
