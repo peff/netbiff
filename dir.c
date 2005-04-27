@@ -18,7 +18,7 @@ int dir_foreach(const char* dirname, int (*cb)(const char*, const char *)) {
 
   d = opendir(dirname);
   if(!d)
-    return -1;
+    return errno == ENOENT ? 0 : 1;
 
   errors = 0;
   while((ent = readdir(d)) != NULL) {

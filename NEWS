@@ -1,3 +1,6 @@
+0.9.19
+ - Treat non-existant configuration directories as empty.
+
 0.9.18
  - For GTK interface, manually set WM_CLASS to Netbiff; this avoids the case
    where GTK fails to guess the right name (e.g., when we have already parsed
