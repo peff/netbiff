@@ -120,7 +120,7 @@ static int imap_command(ImapContext *c, UntaggedCallback ucb,
   BIO_puts(b, ". ");
   BIO_vprintf(b, fmt, ap);
   BIO_puts(b, "\r\n");
-  BIO_flush(b);
+  if(!BIO_flush(b)) return -1;
 
   va_end(ap);
 
