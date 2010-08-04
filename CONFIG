@@ -25,15 +25,17 @@ appropriate backend.
 
 .netbiff/connections/*/folders
   This file should contain a list of folders, one per line, that should be
-checked for this connection.
+checked for this connection. Defaults to "INBOX".
 
 .netbiff/connections/*/update
   This file should contain a list of actions, one per line, that should be
 performed when the connection indicates an update (i.e., when it's biffed).
+Defaults to "image" and "beep".
 
 .netbiff/connections/*/reset
   This file should contain a list of actions, one per line, that should be
-performed when the connection is reset (i.e., unbiffed).
+performed when the connection is reset (i.e., unbiffed). Defaults to
+"image-reset".
 
 .netbiff/connections/*/*
   Any other contents of a connection directory will be ignored unless

@@ -5,6 +5,7 @@
 #include "dir.h"
 
 #include <stdio.h>
+#include <errno.h>
 
 unsigned long poll_frequency = DEFAULT_POLL_FREQUENCY;
 
@@ -167,20 +168,30 @@ static int conf_add_connection(const char *rel, const char *full) {
 
   make_path(buf, full, "update");
   if(read_data_list(buf, conf_add_update, c) < 0) {
-    parse_error(buf,"unable to read update data",xsyserr());
-    return -1;
+    if (errno != ENOENT) {
+      parse_error(buf,"unable to read update data",xsyserr());
+      return -1;
+    }
+    conf_add_update(c, "image");
+    conf_add_update(c, "beep");
   }
   
   make_path(buf, full, "reset");
   if(read_data_list(buf, conf_add_reset, c) < 0) {
-    parse_error(buf,"unable to read reset data",xsyserr());
-    return -1;
+    if (errno != ENOENT) {
+      parse_error(buf,"unable to read reset data",xsyserr());
+      return -1;
+    }
+    conf_add_reset(c, "image-reset");
   }
   
   make_path(buf, full, "folders");
   if(read_data_list(buf, conf_add_folder, c) < 0) {
-    parse_error(buf,"unable to read folder data",xsyserr());
-    return -1;
+    if (errno != ENOENT) {
+      parse_error(buf,"unable to read folder data",xsyserr());
+      return -1;
+    }
+    conf_add_folder(c, "INBOX");
   }
 
   make_path(buf, full, "secret");
